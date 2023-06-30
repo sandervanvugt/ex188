@@ -1,0 +1,11 @@
+FROM busybox AS builder
+WORKDIR /appfiles
+RUN     sh -c "echo 'echo hello world' > hellofile" && \ 
+	chmod +x hellofile
+
+FROM alpine
+RUN apk add nmap
+WORKDIR /root
+COPY --from=builder /appfiles/hellofile ./
+CMD ["sh", "-c", "./hellofile"]
+

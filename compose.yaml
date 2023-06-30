@@ -1,0 +1,13 @@
+services:
+  frontend:
+    image: docker.io/library/nginx
+    ports:
+      - "8080:80"
+  backend:
+    image: docker.io/library/mariadb
+    container_name: "backend_db"
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+    volumes:
+      - ./dbvol:/var/lib/mariadb:Z
+
