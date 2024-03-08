@@ -1,0 +1,7 @@
+FROM alpine
+VOLUME /mydata
+WORKDIR /mydata
+COPY countdown .
+ENTRYPOINT ["./countdown"]
+CMD ["1"]
+
