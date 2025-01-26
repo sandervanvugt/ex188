@@ -5,6 +5,10 @@ MAINTAINER Sander <mail@sandervanvugt.nl>
 COPY ./sander.repo /etc/yum.repos.d/
 
 # Install cool software
+RUN sed -i s/#baseurl/baseurl/ /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i s/mirrorlist.centos.org/vault.centos.org/ /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i s/mirror.centos.org/vault.centos.org/ /etc/yum.repos.d/CentOS-Base.repo && \
+    yum clean all
 RUN 	yum -y update 
 RUN	yum -y install bash nmap iproute 
 RUN	yum clean all
