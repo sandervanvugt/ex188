@@ -1,0 +1,177 @@
+FROM registry.redhat.io/ubi9/ubi
+
+RUN useradd -u 1111 fileman && mkdir /data && chown fileman /data
+USER fileman
+
+
+CMD ["touch", "/data/newfile"]
+dimi/Containerfile
+FROM docker.io/mariadb:12.1.1-ubi10-rc
+ARG DB_PASSWORD
+ENV MARIADB_ROOT_PASSWORD=${DB_PASSWORD}
+EXPOSE 3306
+    1  podman ps
+    2  podman kill adc
+    3  curl localhost:8080
+    4  podman ps
+    5  podman kill d163
+    6  while true; do true; done
+    7  podman ps
+    8  systemctl --user enable podman-restart.service 
+    9  sudo reboot
+   10  podman ps
+   11  sudo useradd anna
+   12  sudo passwd anna
+   13  sudo loginctl enable-linger anna
+   14  ssh anna@localhost
+   15  sudo reboot
+   16  ps aux | grep anna
+   17  ssh anna@localhost
+   18  sudo reboot
+   19  ps faux | grep -C5 linda
+   20  su - linda
+   21  ssh linda@localhost
+   22  podman run -d --label "io.containers.autoupdate=registry" -p 8087:8080 --name autoginx docker.io/library/nginx
+   23  cd .config/systemd/user/
+   24  podman generate systemd -n --files autoginx
+   25  podman stop autoginx
+   26  systemctl --user enable --now container-autoginx
+   27  podman auto-update
+   28  podman label podman_systemd_unit=true autoginx
+   29  cd
+   30  cd ex188/
+   31  ./countdown 13
+   32  podman ps
+   33  podman generate kubernetes registry
+   34  podman generate --help
+   35  podman generate kube registry
+   36  podman generate kube registry > registry.yaml
+   37  vim registry.yaml 
+   38  podman run --help
+   39  podman pod --help
+   40  podman pod create --help
+   41  sudo subscription-manager repos --enable codeready-builder-for-rhel-9-aarch-rpms
+   42  sudo subscription-manager repos --list | grep codeready
+   43  sudo subscription-manager repos --enable codeready-builder-for-rhel-9-aarch64-rpms
+   44  sudo dnf install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm
+   45  sudo dnf install podman-compose
+   46  vim compose.yaml 
+   47  podman-compose up -d
+   48  podman ps
+   49  podman play kube registry.yaml 
+   50  vim registry.yaml 
+   51  sudo lsns
+   52  vim registry.yaml 
+   53  man podman-play-kube
+   54  podman play kube --help
+   55  podman ps
+   56  podman kill $(podman ps | awk '{ print $1 }'
+)
+   57  podman ps
+   58  podman kill $(podman ps | awk '{ /docker/ print $1 }'
+)
+   59  podman kill $(podman ps -a -q)
+   60  podman ps
+   61  lsns
+   62  vim registry.yaml new.yaml
+   63  cp registry.yaml new.yaml
+   64  vim new.yaml 
+   65  podman play kube new.yaml 
+   66  podman ps
+   67  lsns
+   68  lsns | grep registry | grep mnt
+   69  lsns | grep 3123
+   70  lsns
+   71  lsns | grep mnt
+   72  lsns | grep -e 6820 -e 6811
+   73  ssh sander@192.168.52.209
+   74  ./countdown 20
+   75  ssh sander@192.168.52.209
+   76  #podman run docker.io/library/mariadb
+   77  podman volume create mariavol
+   78  podman run -v mariavol:/var/lib/mysql:Z -p 3206:3306 --memory 128M -d --name booksdb -e MARIADB_ROOT_PASSWORD=password docker.io/library/mariadb
+   79  podman ps
+   80  cd 
+   81  mkdir -p .config/systemd/user
+   82  cd .config/systemd/user
+   83  podman generate -n --files booksdb
+   84  podman generate systemd -n --files booksdb
+   85  vim container-booksdb.service 
+   86  systemctl --user daemon-reload
+   87  systemctl --user enable container-booksdb.service 
+   88  sudo loginctl enable-linger student
+   89  cd 
+   90  mkdir dimi
+   91  cd dimi
+   92  vim Containerfile
+   93  podman build -t task2 .
+   94* podman run -p 3307:3306 --name task2-db task2
+   95  cat Containerfile 
+   96  podman build -t task2 --build-arg test2db=password .
+   97  cat Containerfile 
+   98  vim Containerfile 
+   99  podman build -t task --build-arg test2db=secret
+  100  podman build -t task --build-arg test2db=secret .
+  101  podman run -d task
+  102  podman ps
+  103  podman exec -it frosty_cori echo $MARIADB_ROOT_PASSWORD
+  104  podman inspect image task | less
+  105  vim Containerfile 
+  106  man Containerfile
+  107  vim man
+  108  cat man
+  109  cat Containerfile 
+  110  podman build -t task --build-arg DB_PASSWORD=password
+  111  podman build -t task --build-arg DB_PASSWORD=password .
+  112  podman inspect image task | less
+  113  podman rmi task
+  114  podman rmi --force task
+  115  podman build -t task2 --build-arg DB_PASSWORD=password .
+  116  podman inspect image task2 | less
+  117  podman run -d task2
+  118  podman ps
+  119  podman exec -it trusting_colden echo $MARIADB_ROOT_PASSWORD
+  120  podman logs trusting_colden 
+  121  vim Containerfile 
+  122  cat Containerfile 
+  123  history | grep task2
+  124  cd 
+  125  mkdir perm
+  126  cd perm
+  127  vim Containerfile
+  128  #podman build -t touchfile .
+  129  vim Containerfile
+  130  podman build -t touchfile .
+  131  podman search ubi9
+  132  vim Containerfile
+  133  podman build -t touchfile .
+  134  vim Containerfile 
+  135  podman build -t touchfile .
+  136  #podman run --name filecreate 
+  137  mkdir data
+  138  podman run --name filecreate -v /home/student/data:/data:Z filecreate
+  139  podman images
+  140  podman run --name filecreate -v /home/student/data:/data:Z localhost/touchfile
+  141  cd ~/data
+  142  mkdir ~/data
+  143  podman run --name filecreate -v /home/student/data:/data:Z localhost/touchfile
+  144  podman unshare ls -ld ~/daata
+  145  podman unshare ls -ld ~/data
+  146  podman unshare chown fileman ~/data
+  147  podman unshare chown 1111 ~/data
+  148  podman run --name filecreate -v /home/student/data:/data:Z localhost/touchfile
+  149  podman rm filecreate
+  150  podman run --name filecreate -v /home/student/data:/data:Z localhost/touchfile
+  151  cd ~/data
+  152  ls -l
+  153  cd ..
+  154  ls
+  155  cat perm/Containerfile 
+  156* 
+  157* cat dimi/Containerfile
+  158  cat perm/Containerfile 
+  159  history
+  160  cat perm/Containerfile >> /tmp/history.txt
+  161  echo dimi/Containerfile >> /tmp/history.txt
+  162  cat dimi/Containerfile >> /tmp/history.txt
+  163  history >> /tmp/history.txt
